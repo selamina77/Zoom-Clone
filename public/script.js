@@ -30,20 +30,20 @@ navigator.mediaDevices.getUserMedia({
         },1000);
         
       })
-
-
   // input value
-  let text = $("input");
-  // when press enter send message
-  $('html').keydown(function (e) {
-    if (e.which == 13 && text.val().length !== 0) {
-      socket.emit('message', text.val());
-      text.val('')
+  let text = document.querySelector('#chat_message');
+  console.log(document.querySelector('html'));
+  document.querySelector('html').addEventListener('keydown', function (e) {
+    if (e.which == 13 && text.value.length !== 0) {
+      socket.emit('message', text.value);
+      text.value = '';
     }
   });
+
+
   socket.on("createMessage", message => {
     $("ul").append(`<li class="message"><b>user</b><br/>${message}</li>`);
-    scrollToBottom()
+    // scrollToBottom()
   })
 })
 
@@ -138,11 +138,4 @@ const setPlayVideo = () => {
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
-
-
-
-
-
-
-
 
